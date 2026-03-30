@@ -345,6 +345,13 @@ setInterval(load,10000);
 </body></html>`);
 });
 
+// ── GET /check/:tuId – Kiểm tra mã tủ có trùng không ────
+app.get('/check/:tuId', (req, res) => {
+  const tuId   = req.params.tuId.toLowerCase();
+  const exists = !!db.tus[tuId];
+  res.json({ tuId, exists });
+});
+
 // ── GET /ping ─────────────────────────────────────────────
 app.get('/ping', (req, res) => {
   res.json({ ok: true, uptime: Math.floor(process.uptime())+'s', tuCount: Object.keys(db.tus).length });
